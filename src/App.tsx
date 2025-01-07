@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect } from "react";
+import Login from "./Components/Login";
+import { useDispatch, useSelector } from "react-redux";
+import { account } from "./appwrite";
+import { setUser } from "./feature/auth/authSlice";
+import { RootState } from "./store";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { currUserData } = useSelector((state: RootState) => state.authReducer);
+  const dispatch = useDispatch();
+
+  // function to get the user
+  const getUser = async () => {
+    try {
+      const resp = await account.get();
+      console.log(resp);
+      dispatch(setUser(resp));
+    } catch (error) {
+      console.log("Error in getUser", error);
+    }
+  };
+
+  // get the user when the page loads
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  // if the currUserData is not present, then show the login page
+  if (currUserData === null) {
+    return (
+      <>
+        <Login />
+      </>
+    );
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <main>
+      <h2>Welcome</h2>
+    </main>
+  );
 }
 
-export default App
+export default App;
