@@ -1,10 +1,10 @@
 import React from "react";
-import taskIcon from "../assets/icons/task.svg";
 import googleIcon from "../assets/icons/google.svg";
 import loginPageImg from "../assets/images/login-page-img.svg";
 import circlesBg from "../assets/images/circles_bg.svg";
-import { useDispatch } from "react-redux";
+import { Logo } from "./index";
 
+import { useDispatch } from "react-redux";
 import { loginUser } from "../feature/auth/authSlice";
 
 const Login: React.FC = () => {
@@ -21,10 +21,7 @@ const Login: React.FC = () => {
       <div className="max-w-[365px] translate-x-10">
         {/* task management */}
         <div className="w-full max-w-[300px] mb-8">
-          <div className="flex items-end gap-0.5 mb-[7px]">
-            <img src={taskIcon} alt="task icon not found" />
-            <h2 className="text-2xl font-bold text-[#7B1984]">TaskBuddy</h2>
-          </div>
+          <Logo />
 
           <p className="font-medium text-xs ml-1.5 leading-[140%]">
             Streamline your workflow and track progress effortlessly with our

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { account } from "../../appwrite";
 import { OAuthProvider } from "appwrite";
 
-// type for user obj returned after account.get() in app.tsx
+// type for user obj returned after account.get()
 export interface User {
   $id: string | null;
   email: string | null;

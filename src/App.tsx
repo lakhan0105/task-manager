@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import Login from "./Components/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { account } from "./appwrite";
 import { setUser } from "./feature/auth/authSlice";
 import { RootState } from "./store";
+import { Login, Tasks } from "./Components/index.ts";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const { currUserData } = useSelector((state: RootState) => state.authReducer);
@@ -36,7 +37,8 @@ function App() {
 
   return (
     <main>
-      <h2>Welcome</h2>
+      <Toaster />
+      <Tasks />
     </main>
   );
 }
